@@ -1,8 +1,16 @@
 from app.data_model import Vehicle
-from app.database import db #fix sqlAlchemy warnings
+from app.database import db 
 
 
 class ValidationError(Exception):
+    """
+    Exception raised when vehicle input validation fails.
+
+    Attributes:
+        errors (dict): A mapping of field names to lists of error messages.
+        status_code (int): HTTP status code to return (default is 422).
+    """
+    
     def __init__(self, errors, status_code=422):
         self.errors = errors
         self.status_code = status_code
@@ -10,6 +18,26 @@ class ValidationError(Exception):
 
 
 def validate_vehicle_body(body, is_update=False, current_vin=None):
+    """
+    Validate and normalize incoming Vehicle request data.
+
+    Parameters:
+        body (dict): JSON body from the client containing vehicle fields.
+        is_update (bool): 
+            False for POST requests (all required fields must be present).  
+            True for PUT requests (only provided fields are validated).
+        current_vin (str or None):
+            The existing VIN of the vehicle being updated. Used to detect whether 
+            VIN changes are allowed
+
+    Returns:
+        dict: A normalized copy of the body, with whitespace trimmed, 
+              VIN uppercased, and fuel_type lowercased.
+
+    Raises:
+        ValidationError: If required fields are missing, types are invalid, 
+                         field values violate constraints, or the VIN already exists.
+    """
     errors = {}
     
     if not is_update:  # for POST

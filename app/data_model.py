@@ -22,6 +22,13 @@ class Vehicle(db.Model):  # rely on db model
         super().__init__(**kwargs)
     
     def to_dict(self):
+        """
+        Convert the Vehicle model into a JSON-serializable dictionary.
+
+        Returns:
+            dict: Public-facing representation of the vehicle,
+                  converting Decimal purchase_price to float.
+        """
         return {
             "vin": self.vin,
             "manufacturer_name": self.manufacturer_name,

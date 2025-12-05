@@ -11,6 +11,7 @@ vehicle_bp = Blueprint('vehicles', __name__)
 # GET all vehicles
 @vehicle_bp.route('/vehicle', methods=['GET'])
 def get_all_vehicles():
+    """Return json format of all vehicles in database"""
     vehicles = Vehicle.query.all()
     return jsonify([v.to_dict() for v in vehicles]), 200
 
@@ -18,6 +19,7 @@ def get_all_vehicles():
 # POST new vehicle
 @vehicle_bp.route('/vehicle', methods=['POST'])
 def create_vehicle():
+    """Add new vehicle to database, unique VIN"""
     body = request.get_json()
     
     if body is None:
@@ -49,6 +51,7 @@ def create_vehicle():
 # GET vehicle by VIN
 @vehicle_bp.route('/vehicle/<vin>', methods=['GET'])
 def get_vehicle(vin):
+    """Return JSON for existing vehicle in database"""
     vehicle = db.session.get(Vehicle, vin.upper())
     
     if not vehicle:
@@ -60,6 +63,7 @@ def get_vehicle(vin):
 # PUT (update vehicle by VIN)
 @vehicle_bp.route('/vehicle/<vin>', methods=['PUT'])
 def update_vehicle(vin):
+    """Update info for an existing vehicle"""
     body = request.get_json()
     
     if body is None:
@@ -98,6 +102,7 @@ def update_vehicle(vin):
 # DELETE vehicle by VIN
 @vehicle_bp.route('/vehicle/<vin>', methods=['DELETE'])
 def delete_vehicle(vin):
+    """Remove an existing vehicle"""
     vehicle = db.session.get(Vehicle, vin.upper())
     
     if not vehicle:
