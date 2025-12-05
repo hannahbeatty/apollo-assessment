@@ -1,7 +1,7 @@
 from flask import Blueprint, request, jsonify
-from database import db
-from data_model import Vehicle
-from vehicle_validator import validate_vehicle_body, ValidationError
+from app.database import db
+from app.data_model import Vehicle
+from app.vehicle_validator import validate_vehicle_body, ValidationError
 from sqlalchemy.exc import IntegrityError
 
 

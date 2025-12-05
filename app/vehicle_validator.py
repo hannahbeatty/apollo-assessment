@@ -1,4 +1,4 @@
-from data_model import Vehicle
+from app.data_model import Vehicle
 
 
 class ValidationError(Exception):

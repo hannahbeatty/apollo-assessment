@@ -1,4 +1,4 @@
-from database import db
+from app.database import db
 
 # use ORM (sql alchemy)
 # class = table, objects in class = rows
