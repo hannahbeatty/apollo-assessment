@@ -1,12 +1,11 @@
 PLANNING DOC
 genflow = client (use postman for now)
     -> api layer (flask) 
-    -> service (?) 
-    -> data access (ORM/SQL) 
+    -> validation 
+    -> data access (ORM/SQL) (made from data_model)
     -> database 
 
 timeline
-
 
 Phase 1 - implement database
     # make datamodel in python
@@ -50,3 +49,4 @@ things to add:
 - doc strings to all funcs
 - standard testing, not just postman
     ^ need test config
+- documentation (research this?)
