@@ -159,10 +159,7 @@ For verbose output:
 pytest tests/tests.py -v
 ```
 
-For detailed output with print statements:
-```bash
-pytest tests/tests.py -v -s
-```
+
 
 ### Test Coverage
 
