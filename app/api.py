@@ -49,7 +49,7 @@ def create_vehicle():
 # GET vehicle by VIN
 @vehicle_bp.route('/vehicle/<vin>', methods=['GET'])
 def get_vehicle(vin):
-    vehicle = Vehicle.query.get(vin.upper())
+    vehicle = db.session.get(Vehicle, vin.upper())
     
     if not vehicle:
         return jsonify({"error": "Vehicle not found"}), 404
@@ -66,7 +66,7 @@ def update_vehicle(vin):
         return jsonify({"error": "Invalid JSON"}), 400
     
     try:
-        vehicle = Vehicle.query.get(vin.upper())
+        vehicle = db.session.get(Vehicle, vin.upper())
         
         if not vehicle:
             return jsonify({"error": "Vehicle not found"}), 404
@@ -98,7 +98,7 @@ def update_vehicle(vin):
 # DELETE vehicle by VIN
 @vehicle_bp.route('/vehicle/<vin>', methods=['DELETE'])
 def delete_vehicle(vin):
-    vehicle = Vehicle.query.get(vin.upper())
+    vehicle = db.session.get(Vehicle, vin.upper())
     
     if not vehicle:
         return jsonify({"error": "Vehicle not found"}), 404

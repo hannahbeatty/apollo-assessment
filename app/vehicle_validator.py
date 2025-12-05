@@ -1,4 +1,5 @@
 from app.data_model import Vehicle
+from app.database import db #fix sqlAlchemy warnings
 
 
 class ValidationError(Exception):
@@ -33,7 +34,7 @@ def validate_vehicle_body(body, is_update=False, current_vin=None):
         else:
             # Uniqueness check (POST only, or PUT if VIN is changing)
             if not is_update or (current_vin and vin.upper() != current_vin.upper()):
-                existing = Vehicle.query.get(vin.upper())
+                existing = db.session.get(Vehicle, vin.upper())
                 if existing:
                     errors.setdefault("vin", []).append("VIN already exists")
 
