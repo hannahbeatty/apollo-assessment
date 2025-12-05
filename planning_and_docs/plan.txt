@@ -1,0 +1,52 @@
+PLANNING DOC
+genflow = client (use postman for now)
+    -> api layer (flask) 
+    -> service (?) 
+    -> data access (ORM/SQL) 
+    -> database 
+
+timeline
+
+
+Phase 1 - implement database
+    # make datamodel in python
+
+    data access
+        # orm implementation? like how i did for smart home networking?
+        ^ then if I have time optimize the sql calls??
+        # would making a local cache make sense here
+
+    database
+        sqlite or postgres/mysql (simple enough for litw?)
+
+ORRRR raw sql approach
+
+
+Phase 2 - implement CRUD APIs
+
+FLASK!
+    from pdf
+    GET /vehicle
+    POST /vehicle
+    GET /vehicle/<vin>
+    PUT /vehicle/<vin>
+    DELETE /vehicle/<vin>
+
+    receive requests
+    Parse JSON
+    Pass validated data to the service/database layer
+    Return JSON responses with correct HTTP status codes
+
+Phase 3 - Implement Testing (throughout)
+    unit test throughout via POSTMAN
+    use pytest, add testing config, check unix stuff
+
+Phase 4 - Cleanup + documentation
+    do this later lol
+
+
+
+things to add:
+- doc strings to all funcs
+- standard testing, not just postman
+    ^ need test config
